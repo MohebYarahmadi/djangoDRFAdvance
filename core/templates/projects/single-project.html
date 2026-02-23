@@ -1,1 +1,11 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
 <h1>Single Project Template</h1>
+<p>This project is {{ title }} with {{ budget }} budget.</p>
+<h4>{{ pk }}</h4>
+
+<a href="{% url 'projects:projects' %}">Back to Projects</a>
+
+{% endblock %}

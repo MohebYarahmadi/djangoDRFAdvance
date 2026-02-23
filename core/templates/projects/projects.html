@@ -3,5 +3,8 @@
 {% block body %}
 
 <h1>Projects Template</h1>
+<p>My name is {{ first_name }} {{ last_name }}</p>
+
+<a href="{% url 'projects:single-project' 1254 %}">A Project</a>
 
 {% endblock %}
