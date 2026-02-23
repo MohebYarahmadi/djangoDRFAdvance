@@ -4,4 +4,10 @@ from django.http import HttpResponse
 
 # Create your views here.
 def projects(request):
-    return HttpResponse('Projects HomePage')
+    template_name = 'projects/projects.html'
+    return render(request, template_name)
+
+
+def project(request):
+    template_name = 'projects/single-project.html'
+    return render(request, template_name)
