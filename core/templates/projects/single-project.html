@@ -2,10 +2,18 @@
 
 {% block body %}
 
-<h1>Single Project Template</h1>
-<p>This project is {{ title }} with {{ budget }} budget.</p>
-<h4>{{ pk }}</h4>
+<h1>{{ project.title }}</h1>
+<p><b>Vote Ratio:</b> {{ project.vote_ratio }}</p>
+<p><b>Vote Total:</b> {{ project.vote_total }}</p>
+<p><b>Source:</b> {{ project.source_link }}</p>
 
-<a href="{% url 'projects:projects' %}">Back to Projects</a>
+{% for tag in tags %}
+<span class="badge badge-dark">{{ tag.name }}</span>
+{% endfor %}
+<hr>
+<h5>id: <i><small class="text-muted">{{ pk }}</small></i></h5>
+<h5>id: <i><small class="text-muted">{{ project.id }}</small></i></h5>
+
+<a class="btn btn-primary" href="{% url 'projects:projects' %}">Back to Projects</a>
 
 {% endblock %}
