@@ -51,3 +51,13 @@ def update_project(request, pk):
 
     context = {'form': form}
     return render(request, template_name, context)
+
+def delete_project(request, pk):
+    template_name = 'projects/delete-project.html'
+    project = models.Project.objects.get(id=pk)
+    context = {'object': project}
+
+    if request.method == 'POST':
+        project.delete()
+        return redirect('projects:projects')
+    return render(request, template_name, context)
