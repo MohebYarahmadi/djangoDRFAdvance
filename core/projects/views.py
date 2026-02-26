@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 
 from . import models
@@ -27,5 +27,12 @@ def project(request, pk):
 def create_project(request):
     template_name = 'projects/project-form.html'
     form = forms.ProjectForm()
+
+    if request.method == 'POST':
+        form = forms.ProjectForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('projects:projects')
+
     context = {'form': form}
     return render(request, template_name, context)
