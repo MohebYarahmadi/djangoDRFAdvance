@@ -36,3 +36,18 @@ def create_project(request):
 
     context = {'form': form}
     return render(request, template_name, context)
+
+
+def update_project(request, pk):
+    project = models.Project.objects.get(id=pk)
+    template_name = 'projects/project-form.html'
+    form = forms.ProjectForm(instance=project)
+
+    if request.method == 'POST':
+        form = forms.ProjectForm(request.POST, instance=project)
+        if form.is_valid():
+            form.save()
+            return redirect('projects:projects')
+
+    context = {'form': form}
+    return render(request, template_name, context)

@@ -7,7 +7,8 @@
 {% for project in projecs %}
 <h4>{{ project.title }}</h4>
 <p>{{ project.description }}</p>
-<a class="btn btn-primary" href="{% url 'projects:single-project' project.id %}">More...</a>
+<a class="btn btn-primary" href="{% url 'projects:update-project' project.id %}">Edit</a>
+<a class="btn btn-warning" href="{% url 'projects:single-project' project.id %}">View</a>
 <br>
 {% endfor %}
 
