@@ -3,6 +3,7 @@
 {% block body %}
 
 <h1>Projects Template</h1>
+<a class="btn btn-success" href="{% url 'projects:create-project' %}">Add Project</a>
 {% for project in projecs %}
 <h4>{{ project.title }}</h4>
 <p>{{ project.description }}</p>
