@@ -60,4 +60,5 @@ def delete_project(request, pk):
     if request.method == 'POST':
         project.delete()
         return redirect('projects:projects')
+        
     return render(request, template_name, context)
