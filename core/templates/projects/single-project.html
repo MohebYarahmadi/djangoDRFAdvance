@@ -2,20 +2,48 @@
 
 {% block body %}
 
-<h1>{{ project.title }}</h1>
-<p><b>Vote Ratio:</b> {{ project.vote_ratio }}</p>
-<p><b>Vote Total:</b> {{ project.vote_total }}</p>
-<p><b>Source:</b> {{ project.source_link }}</p>
-
-{% for tag in tags %}
-<span class="badge badge-dark">{{ tag.name }}</span>
-{% endfor %}
-<hr>
-<h5>id: <i><small class="text-muted">{{ pk }}</small></i></h5>
-<h5>id: <i><small class="text-muted">{{ project.id }}</small></i></h5>
-
-<a class="btn btn-warning" href="{% url 'projects:update-project' project.id %}">Edit</a>
-<a class="btn btn-danger" href="{% url 'projects:delete-project' project.id %}">Delete</a>
-<a class="btn btn-primary" href="{% url 'projects:projects' %}">Back to Projects</a>
+<div class="card shadow-sm mb-4">
+    <div class="card-body">
+        <h1 class="card-title mb-3">{{ project.title }}</h1>
+        <p class="mb-1">
+            <span class="fw-bold">Vote Ratio:</span>
+            <span class="badge bg-secondary">{{ project.vote_ratio }}</span>
+        </p>
+        <p class="mb-1">
+            <span class="fw-bold">Total Votes:</span>
+            <span class="badge bg-info text-dark">{{ project.vote_total }}</span>
+        </p>
+        <p class="mb-2">
+            <span class="fw-bold">Source:</span>
+            {% if project.source_link %}
+                <a href="{{ project.source_link }}" target="_blank" class="link-primary">{{ project.source_link }}</a>
+            {% else %}
+                <span class="text-muted">No link provided</span>
+            {% endif %}
+        </p>
+        <div class="mb-2">
+            {% for tag in tags %}
+                <span class="badge bg-dark">{{ tag.name }}</span>
+            {% empty %}
+                <span class="text-muted">No tags</span>
+            {% endfor %}
+        </div>
+        <hr>
+        <div class="mb-3">
+            <small class="text-muted">Project ID: <span class="fw-light">{{ project.id }}</span></small>
+        </div>
+        <div class="d-flex gap-2">
+            <a class="btn btn-warning" href="{% url 'projects:update-project' project.id %}">
+                <i class="bi bi-pencil-square"></i> Edit
+            </a>
+            <a class="btn btn-danger" href="{% url 'projects:delete-project' project.id %}">
+                <i class="bi bi-trash"></i> Delete
+            </a>
+            <a class="btn btn-primary ms-auto" href="{% url 'projects:projects' %}">
+                <i class="bi bi-arrow-left"></i> Back to Projects
+            </a>
+        </div>
+    </div>
+</div>
 
 {% endblock %}

@@ -2,19 +2,35 @@
 
 {% block body %}
 
-<h1>{{ project.title }}</h1>
+<div class="card shadow-sm mt-4">
+    <div class="card-body">
+        <h2 class="card-title mb-3 text-danger">Delete Project</h2>
+        <h4 class="mb-1">{{ project.title }}</h4>
 
-{% for tag in tags %}
-<span class="badge badge-dark">{{ tag.name }}</span>
-{% endfor %}
+        <div class="mb-3">
+            {% if tags %}
+                {% for tag in tags %}
+                    <span class="badge bg-dark">{{ tag.name }}</span>
+                {% endfor %}
+            {% else %}
+                <span class="text-muted">No tags</span>
+            {% endif %}
+        </div>
 
-
-<form method="post">
-    {% csrf_token %}
-    <h3>Are you sure to delete "{{object}}"?</h3>
-    <a class="btn btn-primary" href="{% url 'projects:projects' %}">Cancel</a>
-    <input type="submit" value="Confirm">
-</form>
+        <form method="post" class="mt-4">
+            {% csrf_token %}
+            <p class="fs-5">Are you sure you want to delete <span class="fw-bold">"{{ project.title }}"</span>? This action cannot be undone.</p>
+            <div class="d-flex gap-2 mt-3">
+                <a class="btn btn-secondary" href="{% url 'projects:projects' %}">
+                    <i class="bi bi-arrow-left"></i> Cancel
+                </a>
+                <button type="submit" class="btn btn-danger">
+                    <i class="bi bi-trash"></i> Confirm Delete
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
 
 
 {% endblock %}
